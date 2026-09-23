@@ -15,7 +15,7 @@ public class AvaliacaoRequestDTO {
 
     @NotNull
     @Min(1)
-    @Max(10)
+    @Max(5)
     private Integer nota;
 
     public String getAutor() {
