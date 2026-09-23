@@ -9,7 +9,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @SpringBootTest
-class CursoApiApplicationTests {
+class AvaliacoesApiApplicationTests {
 
 	@Container
 	@ServiceConnection
