@@ -2,6 +2,7 @@ package nader.curso_api.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -112,5 +113,26 @@ class CursoControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(corpo))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void deleteCursos_marcaComoDeletadoLogicamente() throws Exception {
+        Curso curso = new Curso();
+        curso.setNome("Java Básico");
+        curso.setCargaHoraria(20);
+        curso = cursoRepository.save(curso);
+
+        mockMvc.perform(delete("/cursos/" + curso.getId()))
+                .andExpect(status().isNoContent());
+
+        Curso atualizado = cursoRepository.findById(curso.getId()).orElseThrow();
+        assertThat(atualizado.isDeletado()).isTrue();
+        assertThat(cursoRepository.count()).isEqualTo(1);
+    }
+
+    @Test
+    void deleteCursos_idInexistenteRetorna404() throws Exception {
+        mockMvc.perform(delete("/cursos/999999"))
+                .andExpect(status().isNotFound());
     }
 }
