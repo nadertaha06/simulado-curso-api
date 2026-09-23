@@ -32,7 +32,7 @@ bin/
 
 ### macOS ###
 .DS_Store
-
+projsoft26b.pem
 .claude/
 docs/superpowers/
 .superpowers/
