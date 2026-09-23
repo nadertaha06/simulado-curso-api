@@ -43,8 +43,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/curso-api:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/curso-api:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/avaliacao_api:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/avaliacao_api:${{ github.sha }}
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.5
@@ -60,11 +60,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           envs: DB_HOST,DB_PORT,DB_NAME,DB_USERNAME,DB_PASSWORD
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/curso-api:latest
-            docker stop curso-api || true
-            docker rm curso-api || true
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/avaliacao_api:latest
+            docker stop avaliacao_api|| true
+            docker rm avaliacao_api || true
             docker run -d \
-              --name curso-api \
+              --name avaliacao_api \
               --network host \
               --restart unless-stopped \
               -e DB_HOST="$DB_HOST" \
@@ -72,4 +72,4 @@ jobs:
               -e DB_NAME="$DB_NAME" \
               -e DB_USERNAME="$DB_USERNAME" \
               -e DB_PASSWORD="$DB_PASSWORD" \
-              ${{ secrets.DOCKERHUB_USERNAME }}/curso-api:latest
+              ${{ secrets.DOCKERHUB_USERNAME }}/avaliacao_api:latest
