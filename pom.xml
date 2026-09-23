@@ -114,7 +114,7 @@
 								<rule>
 									<element>CLASS</element>
 									<includes>
-										<include>nader.curso_api.service.CursoService</include>
+										<include>nader.avaliacao_api.service.AvaliacaoService</include>
 									</includes>
 									<limits>
 										<limit>

@@ -1,13 +1,12 @@
-package nader.curso_api;
+package nader.avaliacao_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CursoApiApplication {
-
+public class AvaliacoesApiApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(CursoApiApplication.class, args);
+		SpringApplication.run(AvaliacoesApiApplication.class, args);
 	}
-
 }
+
